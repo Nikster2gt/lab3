@@ -1,7 +1,6 @@
 ﻿  lab3.cpp
   histogram.cpp
-C:\Users\user\source\repos\lab3\lab3\histogram.cpp(39,31): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\user\source\repos\lab3\lab3\histogram.cpp(63,26): warning C4244: =: преобразование "double" в "_Ty", возможна потеря данных
+C:\Users\user\source\repos\lab3\lab3\histogram.cpp(78,26): warning C4244: =: преобразование "double" в "_Ty", возможна потеря данных
           with
           [
               _Ty=size_t

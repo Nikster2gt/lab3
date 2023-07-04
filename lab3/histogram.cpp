@@ -1,6 +1,21 @@
 #include "histogram.h"
 #include <algorithm>
 using namespace std;
+Input read_input(istream& in,bool prompt) {
+    
+    Input data;
+    if (prompt)
+        cerr << "Enter number count: ";
+    size_t number_count;
+    in >> number_count;
+    if (prompt)
+        cerr << "Enter numbers: ";
+    data.numbers = input_numbers(in, number_count);
+    if (prompt)
+        cerr << "Enter bin count: ";
+    in >>data.bin_count;
+    return data;
+}
 void find_minmax(const vector<double>& numbers, double& min, double& max) {
     if (numbers.size() == 0)
         return;
@@ -22,30 +37,30 @@ void find_minmax(const vector<double>& numbers, double& min, double& max) {
         
     }
 }
-vector<double> input_numbers(size_t count) {
+vector<double> input_numbers(istream& in, size_t count) {
     vector<double> result(count);
     for (size_t i = 0; i < count; i++) {
-        cin >> result[i];
+        in >> result[i];
     }
     return result;
 }
-vector<size_t> make_histogram(vector<double> numbers, int bin_count) {
-    vector<size_t> bins(bin_count);
+vector<size_t> make_histogram(Input m) {
+    vector<size_t> bins(m.bin_count);
     double max, min;
-    find_minmax(numbers, min, max);
-    double bin_size = (max - min) / bin_count;
-    for (size_t i = 0; i < numbers.size(); i++) {
+    find_minmax(m.numbers, min, max);
+    double bin_size = (max - min) / m.bin_count;
+    for (size_t i = 0; i < m.numbers.size(); i++) {
         bool found = false;
-        for (size_t j = 0; (j < bin_count - 1) && !found; j++) {
+        for (size_t j = 0; (j < m.bin_count - 1) && !found; j++) {
             auto lo = min + j * bin_size;
             auto hi = min + (j + 1) * bin_size;
-            if ((lo <= numbers[i]) && (numbers[i] < hi)) {
+            if ((lo <= m.numbers[i]) && (m.numbers[i] < hi)) {
                 bins[j]++;
                 found = true;
             }
         }
         if (!found) {
-            bins[bin_count - 1]++;
+            bins[m.bin_count - 1]++;
         }
     }
     return(bins);
