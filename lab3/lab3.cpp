@@ -10,7 +10,7 @@ int main()
     size_t number_count;
     cerr << "Enter number count: ";
     cin >> number_count;
-    vector<double> numbers = input_numbers(number_count);
+    vector<double> numbers = input_numbers(cin, number_count);
     do {
         int bin_count;
         cerr << "Enter bin count: ";
